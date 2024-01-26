@@ -108,7 +108,7 @@ fun UnitConverter(){
 
                 }
             }
-            Text(text = "Unit Converter", modifier = Modifier.padding(30.dp))
+            Text(text = "Unit Converter", modifier = Modifier.padding(30.dp), style = MaterialTheme.typography.headlineLarge)
 
             OutlinedTextField(value = inputValue,
                 onValueChange = {inputValue=it
@@ -138,9 +138,9 @@ fun UnitConverter(){
                             inputUnit="Feet"
                             conversionFactor.value=3.048
                             ConvertUnits() })
-                        DropdownMenuItem(text = { Text("Inches") }, onClick = { iExpanded=false
-                            inputUnit="Inches"
-                            conversionFactor.value=39.3701
+                        DropdownMenuItem(text = { Text("Millimetres") }, onClick = { iExpanded=false
+                            inputUnit="Millimetres"
+                            conversionFactor.value=0.001
                             ConvertUnits() })
 
                     }
@@ -154,19 +154,19 @@ fun UnitConverter(){
                     DropdownMenu(expanded = oExpanded, onDismissRequest = { oExpanded=false }) {
                         DropdownMenuItem(text = { Text("Centimetres") }, onClick = { oExpanded=false
                             outputUnit="Centimetres"
-                            oConversionFactor.value=1.0
+                            oConversionFactor.value=0.01
                             ConvertUnits() })
                         DropdownMenuItem(text = { Text("Metres") }, onClick = { oExpanded=false
                             outputUnit="Metres"
-                            oConversionFactor.value=100.0
+                            oConversionFactor.value=1.0
                             ConvertUnits() })
                         DropdownMenuItem(text = { Text("Feet") }, onClick = { oExpanded=false
                             outputUnit="Feet"
-                            conversionFactor.value=304.8
+                            conversionFactor.value=3.048
                             ConvertUnits() })
-                        DropdownMenuItem(text = { Text("Inches") }, onClick = { oExpanded=false
-                            outputUnit="Inches"
-                            conversionFactor.value=3937.01
+                        DropdownMenuItem(text = { Text("Millimetres") }, onClick = { oExpanded=false
+                            outputUnit="Millimetres"
+                            conversionFactor.value=0.001
                             ConvertUnits() })
 
 
@@ -175,7 +175,7 @@ fun UnitConverter(){
 
             }
             Spacer(modifier = Modifier.height(7.dp))
-            Text(text = "Result: $outputValue $outputUnit")
+            Text(text = "Result: $outputValue $outputUnit", style = MaterialTheme.typography.headlineSmall)
 
         }
        1-> CaptainGame(set)
