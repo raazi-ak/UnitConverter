@@ -27,9 +27,11 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableIntState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -62,6 +64,27 @@ fun UnitConverter(){
     val set = remember {
         mutableIntStateOf(0)
     }
+    var inputValue by remember {
+        mutableStateOf("")
+    }
+    var outputValue by remember {
+        mutableStateOf("")
+    }
+    var inputUnit by remember {
+        mutableStateOf("Centimetres")
+    }
+    var outputUnit by remember {
+        mutableStateOf("Metres")
+    }
+    var iExpanded by remember {
+        mutableStateOf(false)
+    }
+    var oExpanded by remember {
+        mutableStateOf(false)
+    }
+    val conversionFactor = remember {
+        mutableStateOf(0.01)
+    }
     when(set.intValue) {
        0-> Column(
             modifier = Modifier.fillMaxSize(),
@@ -76,7 +99,9 @@ fun UnitConverter(){
             }
             Text(text = "Unit Converter", modifier = Modifier.padding(30.dp))
 
-            OutlinedTextField(value = "", onValueChange = {})
+            OutlinedTextField(value = inputValue,
+                onValueChange = {inputValue=it},
+                label = { Text(text = "Enter value")})
             Spacer(modifier = Modifier.height(16.dp))
             Row {
                 Box {
@@ -120,11 +145,11 @@ fun UnitConverter(){
             Text(text = "Result: ")
 
         }
-       1-> captainGame(set)
+       1-> CaptainGame(set)
     }
 }
 @Composable
-fun captainGame(set:MutableIntState){
+fun CaptainGame(set:MutableIntState){
     val treasureCount= remember{ mutableIntStateOf(0) }
     val direction = remember {
         mutableStateOf("North")
@@ -133,7 +158,10 @@ fun captainGame(set:MutableIntState){
         mutableStateOf(" ")
     }
     val context = LocalContext.current
-    Column(modifier=Modifier.fillMaxSize(), verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally){
+    Column(modifier=Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally)
+    {
 
         Text("Treasure count is ${treasureCount.intValue}")
         Text(text = "Current Direction: ${direction.value}")
